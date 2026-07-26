@@ -16,26 +16,14 @@ import markdown
 
 ROOT = Path(__file__).parent          # blog/ ディレクトリ
 POSTS_DIR = ROOT / "posts"
-SITE_ROOT = ROOT.parent               # リポジトリのルート（トップページを置く場所）
 
-# 一覧上部のカテゴリナビ（表示順）
-CATEGORIES = [
-    "All", "お知らせ", "エッセイ", "寄稿募集",
-]
+# ブログのタイトル・説明
+BLOG_TITLE = "Human Research Collective Blog"
+BLOG_SUBTITLE = "ZINE「Human?」制作の記録。お知らせ・エッセイ・寄稿募集など。"
+# ヘッダー左上の外部リンク（無くしたい場合は None）
+BACK_LINK = ("← Substack", "https://humanresearchcollective.substack.com/")
 
 # ---- 共通パーツ -------------------------------------------------------------
-
-def header_html():
-    return """  <header class="site-header">
-    <div class="site-header__inner">
-      <div class="site-header__left">
-        <a href="index.html" class="logo">
-          Human Research Collective Blog
-        </a>
-      </div>
-      <button class="theme-toggle" type="button" role="switch" aria-label="ライト/ダーク切り替え"><span class="tt-opt" data-mode="L">L</span><span class="tt-opt" data-mode="D">D</span></button>
-    </div>
-  </header>"""
 
 def footer_html():
     return """  <footer class="site-footer">
@@ -48,43 +36,6 @@ def footer_html():
     </div>
   </footer>"""
 
-# テーマ（ライト/ダーク）の適用スクリプト
-THEME_HEAD_JS = """  <script>
-  (function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
-  </script>"""
-
-THEME_TOGGLE_JS = """  <script>
-  (function(){
-    var btn=document.querySelector('.theme-toggle');
-    if(!btn)return;
-    function cur(){return document.documentElement.getAttribute('data-theme')||'light';}
-    function render(){
-      var d=cur()==='dark';
-      var L=btn.querySelector('[data-mode=\\"L\\"]'), D=btn.querySelector('[data-mode=\\"D\\"]');
-      if(L)L.classList.toggle('is-active',!d);
-      if(D)D.classList.toggle('is-active',d);
-    }
-    render();
-    btn.addEventListener('click',function(e){
-      var opt=e.target.closest('[data-mode]');
-      var next = opt ? (opt.getAttribute('data-mode')==='D'?'dark':'light')
-                     : (cur()==='dark'?'light':'dark');
-      document.documentElement.setAttribute('data-theme',next);
-      try{localStorage.setItem('theme',next);}catch(e){}
-      render();
-    });
-  })();
-  </script>"""
-
-def nav_html():
-    items = []
-    for i, c in enumerate(CATEGORIES):
-        cls = ' class="is-active"' if i == 0 else ""
-        cat_val = "all" if i == 0 else html.escape(c)
-        items.append(
-            f'    <a href="#"{cls} data-cat="{cat_val}">{html.escape(c)}</a>')
-    return '  <nav class="category-nav">\n' + "\n".join(items) + "\n  </nav>"
-
 def page(title, body):
     return f"""<!DOCTYPE html>
 <html lang="ja">
@@ -92,14 +43,13 @@ def page(title, body):
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{html.escape(title)}</title>
-{THEME_HEAD_JS}
-  <link rel="stylesheet" href="style.css?v=1" />
+  <link rel="stylesheet" href="style.css?v=2" />
 </head>
 <body>
-{header_html()}
+  <div class="wrap">
 {body}
+  </div>
 {footer_html()}
-{THEME_TOGGLE_JS}
 </body>
 </html>
 """
@@ -124,97 +74,107 @@ def parse_post(path):
             val = val[1:-1]
         meta[key.strip()] = val
 
-    for req in ("title", "date", "category"):
+    for req in ("title", "date"):
         if req not in meta:
             raise ValueError(f"{path.name}: '{req}' が frontmatter にありません")
 
     meta["slug"] = path.stem                 # 出力ファイル名に使用
-    meta["body_html"] = markdown.markdown(
-        body_md, extensions=["extra", "sane_lists"]
-    )
+    body_html = markdown.markdown(body_md, extensions=["extra", "sane_lists"])
+    meta["body_html"] = body_html
     meta.setdefault("excerpt", "")
-    meta.setdefault("thumbnail", "")
+
+    # 全文検索用のプレーンテキスト（タイトル＋本文）
+    plain = re.sub(r"<[^>]+>", " ", body_html)
+    plain = html.unescape(plain)
+    plain = re.sub(r"\s+", " ", plain).strip()
+    meta["plain"] = (meta["title"] + " " + plain).lower()
     return meta
 
 def date_ja(iso):
     y, mth, d = iso.split("-")
-    return f"{int(y)}年{int(mth)}月{int(d)}日"
+    return f"{int(y)}年{int(mth):02d}月{int(d):02d}日"
 
 # ---- 記事ページ生成 ---------------------------------------------------------
 
 def render_article(p):
-    # 記事上部のヒーロー画像は本文先頭画像（＝サムネイル）と重複するため出力しない。
-    # thumbnail は一覧カードのサムネイルとしてのみ使用する。
-    body = f"""  <article class="article">
-    <a href="index.html" class="article__back">← ブログ一覧へ戻る</a>
-    <h1 class="article__title">{html.escape(p["title"])}</h1>
-    <div class="article__meta">{html.escape(p["category"])} ・ {date_ja(p["date"])}</div>
-    <div class="article__body">
+    body = f"""    <article class="article">
+      <a href="index.html" class="article__back">← ブログ一覧へ戻る</a>
+      <h1 class="article__title">{html.escape(p["title"])}</h1>
+      <div class="article__meta">
+        <span class="article__date">{date_ja(p["date"])}</span>
+      </div>
+      <div class="article__body">
 {p["body_html"]}
-    </div>
-  </article>"""
+      </div>
+    </article>"""
     out = ROOT / f'{p["slug"]}.html'
-    out.write_text(page(f'{p["title"]} | Human Research Collective Blog', body), encoding="utf-8")
+    out.write_text(page(f'{p["title"]} | {BLOG_TITLE}', body), encoding="utf-8")
     return out.name
 
 # ---- 一覧ページ生成 ---------------------------------------------------------
+
+def blog_head_html():
+    back = ""
+    if BACK_LINK:
+        label, href = BACK_LINK
+        back = (f'      <a href="{html.escape(href)}" class="blog-head__back" '
+                f'target="_blank" rel="noopener">{html.escape(label)}</a>\n')
+    return f"""    <header class="blog-head">
+{back}      <h1 class="blog-head__title">{html.escape(BLOG_TITLE)}</h1>
+      <p class="blog-head__sub">{html.escape(BLOG_SUBTITLE)}</p>
+    </header>"""
+
+def search_html():
+    return """    <div class="search">
+      <input type="search" class="search__input" placeholder="全文検索（記事横断）…" aria-label="全文検索" />
+      <button class="search__btn" type="button">検索</button>
+    </div>"""
 
 def render_index(posts):
     cards = []
     for p in posts:
         link = f'{p["slug"]}.html'
-        thumb = ""
-        if p["thumbnail"]:
-            thumb = (f'      <a href="{link}" class="post__thumb">'
-                     f'<img src="{html.escape(p["thumbnail"])}" alt="" /></a>\n')
-        excerpt = ""
-        if p["excerpt"]:
-            excerpt = f'      <p class="post__excerpt">{html.escape(p["excerpt"])}</p>\n'
-        cards.append(f"""    <article class="post" data-category="{html.escape(p["category"])}">
-      <a href="{link}"><h2 class="post__title">{html.escape(p["title"])}</h2></a>
-      <div class="post__meta">
-        <span class="post__cat">{html.escape(p["category"])}</span>
-        <span>{date_ja(p["date"])}</span>
-      </div>
-{thumb}{excerpt}      <a href="{link}" class="post__more">read more</a>
-    </article>""")
+        data_search = html.escape(p["plain"], quote=True)
+        cards.append(f"""      <article class="post" data-search="{data_search}">
+        <a href="{link}" class="post__title">{html.escape(p["title"])}</a>
+        <div class="post__meta">
+          <span class="post__date">{date_ja(p["date"])}</span>
+        </div>
+      </article>""")
 
-    empty = '    <p class="post-empty" hidden>このカテゴリの記事はまだありません。</p>'
-    body = nav_html() + '\n\n  <main class="post-list">\n' + \
-        "\n\n".join(cards) + "\n" + empty + "\n  </main>\n" + FILTER_JS
-    (ROOT / "index.html").write_text(
-        page("Human Research Collective Blog", body), encoding="utf-8")
+    empty = '      <p class="posts__empty" hidden>該当する記事はありません。</p>'
+    body = "\n\n".join([
+        blog_head_html(),
+        search_html(),
+        '    <main class="posts">\n' + "\n\n".join(cards) + "\n" + empty + "\n    </main>",
+        FILTER_JS,
+    ])
+    (ROOT / "index.html").write_text(page(BLOG_TITLE, body), encoding="utf-8")
 
-# 一覧のカテゴリ絞り込み（クリックで表示/非表示を切り替え）
-FILTER_JS = """  <script>
-  (function () {
-    var nav = document.querySelector(".category-nav");
-    var posts = Array.prototype.slice.call(document.querySelectorAll(".post"));
-    var empty = document.querySelector(".post-empty");
-    if (!nav) return;
+# 一覧の全文検索（タイトル＋本文）
+FILTER_JS = """    <script>
+    (function () {
+      var posts = Array.prototype.slice.call(document.querySelectorAll(".post"));
+      var empty = document.querySelector(".posts__empty");
+      var input = document.querySelector(".search__input");
+      var btn = document.querySelector(".search__btn");
 
-    function apply(cat) {
-      var shown = 0;
-      posts.forEach(function (el) {
-        var match = cat === "all" || el.getAttribute("data-category") === cat;
-        el.hidden = !match;
-        if (match) shown++;
-      });
-      if (empty) empty.hidden = shown !== 0;
-    }
+      function apply() {
+        var q = (input && input.value || "").trim().toLowerCase();
+        var shown = 0;
+        posts.forEach(function (el) {
+          var show = q === "" || (el.getAttribute("data-search") || "").indexOf(q) !== -1;
+          el.hidden = !show;
+          if (show) shown++;
+        });
+        if (empty) empty.hidden = shown !== 0;
+      }
 
-    nav.addEventListener("click", function (e) {
-      var a = e.target.closest("a[data-cat]");
-      if (!a) return;
-      e.preventDefault();
-      nav.querySelectorAll("a").forEach(function (x) {
-        x.classList.remove("is-active");
-      });
-      a.classList.add("is-active");
-      apply(a.getAttribute("data-cat"));
-    });
-  })();
-  </script>"""
+      if (input) input.addEventListener("input", apply);
+      if (btn) btn.addEventListener("click", apply);
+      apply();
+    })();
+    </script>"""
 
 # ---- main -------------------------------------------------------------------
 
