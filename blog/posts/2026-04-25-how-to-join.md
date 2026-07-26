@@ -3,10 +3,7 @@ title: "Human Research Collectiveへの参加方法"
 date: 2026-04-25
 category: "お知らせ"
 excerpt: "ZINE「Human?」を執筆・編集するHuman Research Collective（HRC）への参加方法は、「Slackに参加すること」だけです。まずは一度、覗きにきてください。"
-thumbnail: images/thumb-news.svg
 ---
-
-![](images/thumb-news.svg)
 
 ZINE「Human?」を執筆・編集するHuman Research Collective（以下、HRC）への参加方法は、「Slackに参加すること」だけです。
 

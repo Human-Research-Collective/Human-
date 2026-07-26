@@ -3,10 +3,7 @@ title: "「Human? Issue 1」オンライン販売開始"
 date: 2026-04-12
 category: "お知らせ"
 excerpt: "Human Research Collectiveが編集するZINE「Human?」の創刊号のオンライン販売を開始しました。総勢7名が集まり、人間とは何かを思考するプロセスを是非感じてください。"
-thumbnail: images/thumb-news.svg
 ---
-
-![](images/thumb-news.svg)
 
 Human Research Collectiveが編集するZINE、「Human?」の創刊号のオンライン販売を開始しました。
 

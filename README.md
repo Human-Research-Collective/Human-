@@ -21,9 +21,7 @@ frontmatter の例:
 ---
 title: "記事タイトル"
 date: 2026-06-20
-category: "お知らせ"   # お知らせ/エッセイ/寄稿募集
-excerpt: "一覧に表示される概要文。"
-thumbnail: images/thumb-news.svg   # 任意
+excerpt: "任意。全文検索の対象に含まれます。"
 ---
 ```
 
@@ -31,6 +29,11 @@ thumbnail: images/thumb-news.svg   # 任意
 
 ## 特徴
 
-- ダークモード切り替え（ヘッダー右上トグル、`localStorage` で記憶）
-- カテゴリによる一覧の絞り込み（クリックで表示/非表示）
+- ヘッダー（タイトル＋サブタイトル）＋全文検索＋記事リストのシンプル構成
+- 全文検索（タイトル・本文をブラウザ内で横断検索。クリックで絞り込み）
+- サムネイル・タグなしのミニマルなリスト表示
+- ダーク/ライトは OS 設定（`prefers-color-scheme`）に追従
 - Markdown を書くだけで記事が増やせるビルドスクリプト
+
+ブログのタイトル・サブタイトル・ヘッダーリンクは `blog/build.py` 冒頭の
+`BLOG_TITLE` / `BLOG_SUBTITLE` / `BACK_LINK` で変更できます。

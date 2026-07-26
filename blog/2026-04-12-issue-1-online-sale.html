@@ -4,28 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>「Human? Issue 1」オンライン販売開始 | Human Research Collective Blog</title>
-  <script>
-  (function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
-  </script>
-  <link rel="stylesheet" href="style.css?v=1" />
+  <link rel="stylesheet" href="style.css?v=2" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="site-header__inner">
-      <div class="site-header__left">
-        <a href="index.html" class="logo">
-          Human Research Collective Blog
-        </a>
+  <div class="wrap">
+    <article class="article">
+      <a href="index.html" class="article__back">← ブログ一覧へ戻る</a>
+      <h1 class="article__title">「Human? Issue 1」オンライン販売開始</h1>
+      <div class="article__meta">
+        <span class="article__date">2026年04月12日</span>
       </div>
-      <button class="theme-toggle" type="button" role="switch" aria-label="ライト/ダーク切り替え"><span class="tt-opt" data-mode="L">L</span><span class="tt-opt" data-mode="D">D</span></button>
-    </div>
-  </header>
-  <article class="article">
-    <a href="index.html" class="article__back">← ブログ一覧へ戻る</a>
-    <h1 class="article__title">「Human? Issue 1」オンライン販売開始</h1>
-    <div class="article__meta">お知らせ ・ 2026年4月12日</div>
-    <div class="article__body">
-<p><img alt="" src="images/thumb-news.svg" /></p>
+      <div class="article__body">
 <p>Human Research Collectiveが編集するZINE、「Human?」の創刊号のオンライン販売を開始しました。</p>
 <p>総勢7名が集まり、人間とは何かをそれぞれの関心や問題意識、経験を出発点に思考を深めていくそのプロセスを是非感じてください。そしていつか、この〈Human Research Collectiveという方法〉にご参加ください。</p>
 <p>「Human?」の詳細については、以下のポストもぜひお読みください。</p>
@@ -46,8 +35,9 @@
 </ul>
 <h2>BASE販売ページ</h2>
 <p><a href="https://hrc.theshop.jp/">https://hrc.theshop.jp/</a></p>
-    </div>
-  </article>
+      </div>
+    </article>
+  </div>
   <footer class="site-footer">
     <div class="site-footer__inner">
       <span>© 2026 Human Research Collective</span>
@@ -57,27 +47,5 @@
       </div>
     </div>
   </footer>
-  <script>
-  (function(){
-    var btn=document.querySelector('.theme-toggle');
-    if(!btn)return;
-    function cur(){return document.documentElement.getAttribute('data-theme')||'light';}
-    function render(){
-      var d=cur()==='dark';
-      var L=btn.querySelector('[data-mode=\"L\"]'), D=btn.querySelector('[data-mode=\"D\"]');
-      if(L)L.classList.toggle('is-active',!d);
-      if(D)D.classList.toggle('is-active',d);
-    }
-    render();
-    btn.addEventListener('click',function(e){
-      var opt=e.target.closest('[data-mode]');
-      var next = opt ? (opt.getAttribute('data-mode')==='D'?'dark':'light')
-                     : (cur()==='dark'?'light':'dark');
-      document.documentElement.setAttribute('data-theme',next);
-      try{localStorage.setItem('theme',next);}catch(e){}
-      render();
-    });
-  })();
-  </script>
 </body>
 </html>

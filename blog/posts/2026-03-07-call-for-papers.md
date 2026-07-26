@@ -3,10 +3,7 @@ title: "「Human?」寄稿のお願い（2026年3月）/ Call for papers (March 
 date: 2026-03-07
 category: "寄稿募集"
 excerpt: "Human?の中心テーマは「人間とは何か？」です。エッセイ、批評、小説、詩など多様な言語表現による寄稿を募集します。あなたにしか書けないことを書いてください。"
-thumbnail: images/thumb-cfp.svg
 ---
-
-![](images/thumb-cfp.svg)
 
 ## 1. Human?について
 
