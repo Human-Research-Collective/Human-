@@ -21,7 +21,7 @@ POSTS_DIR = ROOT / "posts"
 BLOG_TITLE = "Human Research Collective Blog"
 BLOG_SUBTITLE = "ZINE「Human?」制作の記録。お知らせ・エッセイ・寄稿募集など。"
 # ヘッダー左上の外部リンク（無くしたい場合は None）
-BACK_LINK = ("← Substack", "https://humanresearchcollective.substack.com/")
+BACK_LINK = None
 
 # ---- 共通パーツ -------------------------------------------------------------
 
