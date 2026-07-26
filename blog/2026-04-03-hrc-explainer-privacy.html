@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>【解説】「プライバシー」をゼロから理解する | Human Research Collective Blog</title>
+  <script>
+  (function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+  </script>
+  <link rel="stylesheet" href="style.css?v=1" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <div class="site-header__left">
+        <a href="../" class="site-home">← Human Research Collective</a>
+        <a href="index.html" class="logo">
+          Human Research Collective Blog
+        </a>
+      </div>
+      <button class="theme-toggle" type="button" role="switch" aria-label="ライト/ダーク切り替え"><span class="tt-opt" data-mode="L">L</span><span class="tt-opt" data-mode="D">D</span></button>
+    </div>
+  </header>
+  <article class="article">
+    <a href="index.html" class="article__back">← ブログ一覧へ戻る</a>
+    <h1 class="article__title">【解説】「プライバシー」をゼロから理解する</h1>
+    <div class="article__meta">解説 ・ 2026年4月3日</div>
+    <div class="article__body">
+<p><img alt="" src="images/thumb-explainer.svg" /></p>
+<p>「プライバシー」という言葉を、私たちは日常的に使います。しかし、それが具体的に何を指すのかを問われると、答えに詰まる人は少なくありません。この記事では、その基本を丁寧に整理します。</p>
+<h2>1　プライバシーとは何か</h2>
+<p>もともとは「ひとりにしておいてもらう権利（the right to be let alone）」として語られてきました。他者や社会から干渉されない領域を確保する、という考え方です。</p>
+<h2>2　データ社会での変化</h2>
+<p>現代では、個人に関する情報が絶えず生成・記録されます。そのため、プライバシーは「放っておいてもらう」ことから、「自分に関する情報をコントロールする」ことへと重心を移しています。</p>
+<h2>3　私たちにできること</h2>
+<ul>
+<li>何のためにデータが集められているのかを確認する</li>
+<li>設定を見直し、共有範囲を自分で選ぶ</li>
+<li>「便利さ」と「開示」のバランスを意識する</li>
+</ul>
+<p>小さな理解の積み重ねが、より納得のいく選択につながります。</p>
+    </div>
+  </article>
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <span>© 2026 Human Research Collective</span>
+      <div class="social">
+        <a href="https://x.com/" target="_blank" rel="noopener">Twitter</a>
+        <a href="https://note.com/" target="_blank" rel="noopener">note</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+  (function(){
+    var btn=document.querySelector('.theme-toggle');
+    if(!btn)return;
+    function cur(){return document.documentElement.getAttribute('data-theme')||'light';}
+    function render(){
+      var d=cur()==='dark';
+      var L=btn.querySelector('[data-mode=\"L\"]'), D=btn.querySelector('[data-mode=\"D\"]');
+      if(L)L.classList.toggle('is-active',!d);
+      if(D)D.classList.toggle('is-active',d);
+    }
+    render();
+    btn.addEventListener('click',function(e){
+      var opt=e.target.closest('[data-mode]');
+      var next = opt ? (opt.getAttribute('data-mode')==='D'?'dark':'light')
+                     : (cur()==='dark'?'light':'dark');
+      document.documentElement.setAttribute('data-theme',next);
+      try{localStorage.setItem('theme',next);}catch(e){}
+      render();
+    });
+  })();
+  </script>
+</body>
+</html>
