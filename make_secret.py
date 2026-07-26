@@ -61,7 +61,7 @@ TEMPLATE = """<!DOCTYPE html>
       </form>
       <p class="lock__err" hidden>パスワードが違います。</p>
     </section>
-    <section class="secret secret-content" hidden></section>
+    <div class="secret-content" hidden></div>
   </div>
   <footer class="site-footer">
     <div class="site-footer__inner">
