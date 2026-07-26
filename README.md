@@ -2,8 +2,8 @@
 
 ZINE「Human?」の制作を通して〈人間とは何か？〉を探求するコレクティブの静的サイト。
 
-- **トップページ:** リポジトリルート（`index.template.html` → `index.html` を生成、`home.css`）
 - **ブログ:** `blog/`（`build.py`, `style.css`, `posts/*.md`, `images/`）
+- **ルート:** `index.html` は `blog/` へのリダイレクト（サイトはブログのみ）
 - **公開:** GitHub Pages（GitHub Actions でビルド & デプロイ）
 
 ## 記事の追加
@@ -27,7 +27,7 @@ thumbnail: images/thumb-news.svg   # 任意
 ---
 ```
 
-`python blog/build.py` が全記事ページ・ブログ一覧・トップページの「最新記事」を一括生成します。
+`python blog/build.py` が全記事ページとブログ一覧を一括生成します。
 
 ## 特徴
 

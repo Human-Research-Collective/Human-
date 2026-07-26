@@ -29,7 +29,6 @@ def header_html():
     return """  <header class="site-header">
     <div class="site-header__inner">
       <div class="site-header__left">
-        <a href="../" class="site-home">← Human Research Collective</a>
         <a href="index.html" class="logo">
           Human Research Collective Blog
         </a>
@@ -217,32 +216,6 @@ FILTER_JS = """  <script>
   })();
   </script>"""
 
-# ---- トップページ（ルート index.html）の最新記事を差し込む ------------------
-
-def render_top(posts, n=3):
-    template = SITE_ROOT / "index.template.html"
-    if not template.exists():
-        print("  (トップページのテンプレートが無いためスキップ)")
-        return
-    cards = []
-    for p in posts[:n]:
-        link = f'blog/{p["slug"]}.html'
-        thumb = ""
-        if p["thumbnail"]:
-            thumb = (f'<a href="{link}" class="home-card__thumb">'
-                     f'<img src="blog/{html.escape(p["thumbnail"])}" alt="" /></a>')
-        cards.append(f"""      <article class="home-card">
-        {thumb}
-        <div class="home-card__body">
-          <div class="home-card__meta"><span class="home-card__cat">{html.escape(p["category"])}</span><span>{date_ja(p["date"])}</span></div>
-          <a href="{link}"><h3 class="home-card__title">{html.escape(p["title"])}</h3></a>
-        </div>
-      </article>""")
-    html_out = template.read_text(encoding="utf-8").replace(
-        "<!--LATEST_POSTS-->", "\n".join(cards))
-    (SITE_ROOT / "index.html").write_text(html_out, encoding="utf-8")
-    print(f"  トップpage生成: index.html（最新{min(n, len(posts))}件を掲載）")
-
 # ---- main -------------------------------------------------------------------
 
 def main():
@@ -257,8 +230,7 @@ def main():
         name = render_article(p)
         print(f"  記事生成: {name}")
     render_index(posts)
-    render_top(posts)
-    print(f"\n✅ 完了: {len(posts)}件の記事 + 一覧 + トップページを生成しました。")
+    print(f"\n✅ 完了: {len(posts)}件の記事 + 一覧を生成しました。")
 
 if __name__ == "__main__":
     main()
