@@ -103,7 +103,7 @@ def date_ja(iso):
 
 def render_article(p):
     body = f"""    <article class="article">
-      <a href="index.html" class="article__back">← ブログ一覧へ戻る</a>
+      <a href="./" class="article__back">← ブログ一覧へ戻る</a>
       <h1 class="article__title">{html.escape(p["title"])}</h1>
       <div class="article__meta">
         <span class="article__cat">{html.escape(p["category"])}</span>
@@ -150,7 +150,7 @@ def catfilter_html():
 def render_index(posts):
     cards = []
     for p in posts:
-        link = f'{p["slug"]}.html'
+        link = p["slug"]  # 拡張子なしURL（GitHub Pages が .html を自動解決）
         data_search = html.escape(p["plain"], quote=True)
         data_cat = html.escape(p["category"], quote=True)
         cards.append(f"""      <article class="post" data-category="{data_cat}" data-search="{data_search}">
