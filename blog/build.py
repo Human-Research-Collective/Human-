@@ -20,7 +20,7 @@ SITE_ROOT = ROOT.parent               # リポジトリのルート（トップ�
 
 # 一覧上部のカテゴリナビ（表示順）
 CATEGORIES = [
-    "All", "調査レポート", "論考", "解説", "プレスリリース",
+    "All", "お知らせ", "エッセイ", "寄稿募集",
 ]
 
 # ---- 共通パーツ -------------------------------------------------------------
@@ -43,8 +43,8 @@ def footer_html():
     <div class="site-footer__inner">
       <span>© 2026 Human Research Collective</span>
       <div class="social">
-        <a href="https://x.com/" target="_blank" rel="noopener">Twitter</a>
-        <a href="https://note.com/" target="_blank" rel="noopener">note</a>
+        <a href="https://humanresearchcollective.substack.com/" target="_blank" rel="noopener">Substack</a>
+        <a href="https://hrc.theshop.jp/" target="_blank" rel="noopener">STORE</a>
       </div>
     </div>
   </footer>"""

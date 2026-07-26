@@ -1,6 +1,6 @@
 # Human Research Collective
 
-人間を起点に、社会とテクノロジーの関係を研究するリサーチコレクティブの静的サイト。
+ZINE「Human?」の制作を通して〈人間とは何か？〉を探求するコレクティブの静的サイト。
 
 - **トップページ:** リポジトリルート（`index.template.html` → `index.html` を生成、`home.css`）
 - **ブログ:** `blog/`（`build.py`, `style.css`, `posts/*.md`, `images/`）
@@ -21,9 +21,9 @@ frontmatter の例:
 ---
 title: "記事タイトル"
 date: 2026-06-20
-category: "調査レポート"   # All/調査レポート/論考/解説/プレスリリース
+category: "お知らせ"   # お知らせ/エッセイ/寄稿募集
 excerpt: "一覧に表示される概要文。"
-thumbnail: images/thumb-report.svg   # 任意
+thumbnail: images/thumb-news.svg   # 任意
 ---
 ```
 

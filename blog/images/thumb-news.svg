@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#3a4a6b"/>
-      <stop offset="1" stop-color="#1c2436"/>
+      <stop offset="0" stop-color="#1a5f7a"/>
+      <stop offset="1" stop-color="#0f3d4d"/>
     </linearGradient>
   </defs>
   <rect width="1200" height="675" fill="url(#g)"/>
@@ -11,6 +11,6 @@
     <circle cx="200" cy="580" r="170"/>
   </g>
   <text x="80" y="330" font-family="Helvetica Neue, Hiragino Sans, sans-serif" font-size="120" font-weight="700" fill="#ffffff">Human?</text>
-  <text x="86" y="415" font-family="Helvetica Neue, Hiragino Sans, sans-serif" font-size="34" fill="#ffffff" fill-opacity="0.9">エッセイ</text>
+  <text x="86" y="415" font-family="Helvetica Neue, Hiragino Sans, sans-serif" font-size="34" fill="#ffffff" fill-opacity="0.9">お知らせ</text>
   <text x="86" y="600" font-family="Helvetica Neue, Hiragino Sans, sans-serif" font-size="26" fill="#ffffff" fill-opacity="0.7">Human Research Collective</text>
 </svg>
