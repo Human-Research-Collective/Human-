@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Human Research Collective Blog</title>
+  <script>
+  (function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+  </script>
+  <link rel="stylesheet" href="style.css?v=1" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <div class="site-header__left">
+        <a href="../" class="site-home">← Human Research Collective</a>
+        <a href="index.html" class="logo">
+          Human Research Collective Blog
+        </a>
+      </div>
+      <button class="theme-toggle" type="button" role="switch" aria-label="ライト/ダーク切り替え"><span class="tt-opt" data-mode="L">L</span><span class="tt-opt" data-mode="D">D</span></button>
+    </div>
+  </header>
+  <nav class="category-nav">
+    <a href="#" class="is-active" data-cat="all">All</a>
+    <a href="#" data-cat="調査レポート">調査レポート</a>
+    <a href="#" data-cat="論考">論考</a>
+    <a href="#" data-cat="解説">解説</a>
+    <a href="#" data-cat="プレスリリース">プレスリリース</a>
+  </nav>
+
+  <main class="post-list">
+    <article class="post" data-category="調査レポート">
+      <a href="2026-06-20-hrc-first-report.html"><h2 class="post__title">【調査レポート】生成AI時代の働き方に関する意識調査 2026</h2></a>
+      <div class="post__meta">
+        <span class="post__cat">調査レポート</span>
+        <span>2026年6月20日</span>
+      </div>
+      <a href="2026-06-20-hrc-first-report.html" class="post__thumb"><img src="images/thumb-report.svg" alt="" /></a>
+      <p class="post__excerpt">全国1,200人を対象に、生成AIの業務利用と働き方の変化について調査しました。世代・職種による受容度の差と、現場で生じている課題を定量的に整理します。</p>
+      <a href="2026-06-20-hrc-first-report.html" class="post__more">read more</a>
+    </article>
+
+    <article class="post" data-category="論考">
+      <a href="2026-05-12-hrc-essay-agency.html"><h2 class="post__title">【論考】「選ぶ」という営みは、これからどう変わるのか</h2></a>
+      <div class="post__meta">
+        <span class="post__cat">論考</span>
+        <span>2026年5月12日</span>
+      </div>
+      <a href="2026-05-12-hrc-essay-agency.html" class="post__thumb"><img src="images/thumb-essay.svg" alt="" /></a>
+      <p class="post__excerpt">推薦アルゴリズムが日常のあらゆる選択に介在する時代に、人間の「主体性（エージェンシー）」はどこにあるのか。技術と自由意志をめぐる議論を整理します。</p>
+      <a href="2026-05-12-hrc-essay-agency.html" class="post__more">read more</a>
+    </article>
+
+    <article class="post" data-category="解説">
+      <a href="2026-04-03-hrc-explainer-privacy.html"><h2 class="post__title">【解説】「プライバシー」をゼロから理解する</h2></a>
+      <div class="post__meta">
+        <span class="post__cat">解説</span>
+        <span>2026年4月3日</span>
+      </div>
+      <a href="2026-04-03-hrc-explainer-privacy.html" class="post__thumb"><img src="images/thumb-explainer.svg" alt="" /></a>
+      <p class="post__excerpt">よく耳にするけれど、正確に説明するのは難しい「プライバシー」。その歴史的な成り立ちから、現代のデータ社会における意味までを、できるだけ平易に解説します。</p>
+      <a href="2026-04-03-hrc-explainer-privacy.html" class="post__more">read more</a>
+    </article>
+
+    <article class="post" data-category="プレスリリース">
+      <a href="2026-03-01-hrc-launch.html"><h2 class="post__title">【プレスリリース】Human Research Collective を設立しました</h2></a>
+      <div class="post__meta">
+        <span class="post__cat">プレスリリース</span>
+        <span>2026年3月1日</span>
+      </div>
+      <a href="2026-03-01-hrc-launch.html" class="post__thumb"><img src="images/thumb-press.svg" alt="" /></a>
+      <p class="post__excerpt">人間を起点に社会とテクノロジーの関係を研究するリサーチコレクティブ「Human Research Collective」を設立しました。活動の趣旨と今後の展望をお知らせします。</p>
+      <a href="2026-03-01-hrc-launch.html" class="post__more">read more</a>
+    </article>
+    <p class="post-empty" hidden>このカテゴリの記事はまだありません。</p>
+  </main>
+  <script>
+  (function () {
+    var nav = document.querySelector(".category-nav");
+    var posts = Array.prototype.slice.call(document.querySelectorAll(".post"));
+    var empty = document.querySelector(".post-empty");
+    if (!nav) return;
+
+    function apply(cat) {
+      var shown = 0;
+      posts.forEach(function (el) {
+        var match = cat === "all" || el.getAttribute("data-category") === cat;
+        el.hidden = !match;
+        if (match) shown++;
+      });
+      if (empty) empty.hidden = shown !== 0;
+    }
+
+    nav.addEventListener("click", function (e) {
+      var a = e.target.closest("a[data-cat]");
+      if (!a) return;
+      e.preventDefault();
+      nav.querySelectorAll("a").forEach(function (x) {
+        x.classList.remove("is-active");
+      });
+      a.classList.add("is-active");
+      apply(a.getAttribute("data-cat"));
+    });
+  })();
+  </script>
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <span>© 2026 Human Research Collective</span>
+      <div class="social">
+        <a href="https://x.com/" target="_blank" rel="noopener">Twitter</a>
+        <a href="https://note.com/" target="_blank" rel="noopener">note</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+  (function(){
+    var btn=document.querySelector('.theme-toggle');
+    if(!btn)return;
+    function cur(){return document.documentElement.getAttribute('data-theme')||'light';}
+    function render(){
+      var d=cur()==='dark';
+      var L=btn.querySelector('[data-mode=\"L\"]'), D=btn.querySelector('[data-mode=\"D\"]');
+      if(L)L.classList.toggle('is-active',!d);
+      if(D)D.classList.toggle('is-active',d);
+    }
+    render();
+    btn.addEventListener('click',function(e){
+      var opt=e.target.closest('[data-mode]');
+      var next = opt ? (opt.getAttribute('data-mode')==='D'?'dark':'light')
+                     : (cur()==='dark'?'light':'dark');
+      document.documentElement.setAttribute('data-theme',next);
+      try{localStorage.setItem('theme',next);}catch(e){}
+      render();
+    });
+  })();
+  </script>
+</body>
+</html>
