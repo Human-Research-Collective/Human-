@@ -34,6 +34,7 @@ def footer_html():
     <div class="site-footer__inner">
       <span>© 2026 Human Research Collective</span>
       <div class="social">
+        <a href="secret">community</a>
         <a href="https://humanresearchcollective.substack.com/" target="_blank" rel="noopener">Substack</a>
         <a href="https://hrc.theshop.jp/" target="_blank" rel="noopener">STORE</a>
       </div>
