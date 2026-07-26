@@ -24,8 +24,8 @@ BLOG_SUBTITLE = "ZINE「Human?」制作の記録。お知らせ・エッセイ�
 BACK_LINK = None
 
 # カテゴリ（絞り込みの表示順）。記事の frontmatter で category を指定する。
-CATEGORIES = ["エッセイ", "フォトエッセイ", "お知らせ", "その他"]
-DEFAULT_CATEGORY = "その他"
+CATEGORIES = ["エッセイ", "フォトエッセイ", "お知らせ", "ログ"]
+DEFAULT_CATEGORY = "ログ"
 
 # ---- 共通パーツ -------------------------------------------------------------
 
