@@ -10,6 +10,10 @@
   --btn-bg: #16181c;
   --btn-text: #ffffff;
   --link-hover: #4a4a4a;
+  --pill-bg: #f2f2f3;
+  --pill-text: #55585c;
+  --pill-hover: #e7e7e9;
+  --cat: #6a6d72;
   --max: 900px;
 }
 
@@ -25,6 +29,10 @@
     --btn-bg: #eaeaea;
     --btn-text: #14181b;
     --link-hover: #b6b6b6;
+    --pill-bg: #232a2f;
+    --pill-text: #c2c6ca;
+    --pill-hover: #2c343a;
+    --cat: #a7abb0;
   }
 }
 
@@ -115,6 +123,39 @@ img { max-width: 100%; height: auto; }
 }
 .search__btn:hover { opacity: 0.85; }
 
+/* ===== Category filter ===== */
+.catfilter { margin: -28px 0 44px; }
+
+.catfilter__label {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.catfilter__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pill {
+  font: inherit;
+  font-size: 14px;
+  line-height: 1;
+  padding: 8px 15px;
+  color: var(--pill-text);
+  background: var(--pill-bg);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.pill:hover { background: var(--pill-hover); }
+.pill.is-active {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+}
+
 /* ===== Post list ===== */
 .posts { margin-top: 8px; }
 
@@ -136,9 +177,17 @@ img { max-width: 100%; height: auto; }
 .post__title:hover { color: var(--link-hover); }
 
 .post__meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-top: 10px;
   font-size: 13px;
   color: var(--muted);
+}
+
+.post__cat {
+  font-weight: 700;
+  color: var(--cat);
 }
 
 .posts__empty {
@@ -166,9 +215,17 @@ img { max-width: 100%; height: auto; }
 }
 
 .article__meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-top: 14px;
   font-size: 13px;
   color: var(--muted);
+}
+
+.article__cat {
+  font-weight: 700;
+  color: var(--cat);
 }
 
 .article__body { margin-top: 40px; }
