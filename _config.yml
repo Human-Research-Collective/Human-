@@ -1,0 +1,35 @@
+title: "Human Research Collective Blog"
+subtitle: "ZINE「Human?」制作の記録。お知らせ・エッセイ・寄稿募集など。"
+description: "ZINE「Human?」の制作を通して〈人間とは何か？〉を探求するコレクティブのブログ。"
+
+# GitHub Pages のプロジェクトサイト（https://<user>.github.io/Human-/）用
+baseurl: "/Human-"
+
+markdown: kramdown
+
+# 一覧のカテゴリ絞り込み（表示順）。記事の frontmatter `category:` で指定する。
+categories_list:
+  - "エッセイ"
+  - "フォトエッセイ"
+  - "お知らせ"
+  - "ログ"
+default_category: "ログ"
+
+# 記事（リポジトリ直下の .md）は自動的に post レイアウトを使う
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "post"
+
+# サイトに出力しないもの
+exclude:
+  - make_secret.py
+  - secret_content.md
+  - secret_content.html
+  - requirements.txt
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

@@ -1,41 +1,60 @@
 # Human Research Collective
 
-ZINE「Human?」の制作を通して〈人間とは何か？〉を探求するコレクティブの静的サイト。
+ZINE「Human?」の制作を通して〈人間とは何か？〉を探求するコレクティブのブログ。
 
-- **構成:** リポジトリ直下にサイト一式（`build.py`, `style.css`, `posts/*.md`、生成物の `*.html`）
-- **URL:** 一覧は `…/Human-/`、各記事は `…/Human-/<スラッグ>`（`.html` なし。GitHub Pages が自動解決）
-- **公開:** GitHub Pages（GitHub Actions でビルド & デプロイ）
+- **構成:** GitHub Pages 標準の **Jekyll** サイト。リポジトリ直下に記事の `.md` を置くだけ
+- **URL:** 一覧は `…/Human-/`、各記事は `…/Human-/<ファイル名>`（`.html` なし）
+- **公開:** GitHub Pages が `main` への push を自動でビルド＆公開（ビルドスクリプト不要）
 
 ## 記事の追加
 
-`posts/` に frontmatter 付きの `.md` を1枚置いて、ビルドを実行するだけ。
-
-```bash
-pip install -r requirements.txt
-python build.py
-```
-
-frontmatter の例:
+リポジトリ直下に frontmatter 付きの `.md` を1枚置いて push するだけ。
+ファイル名がそのまま URL になります（例: `ebina1.md` → `/Human-/ebina1`）。
 
 ```yaml
 ---
 title: "記事タイトル"
 date: 2026-06-20
-category: "エッセイ"   # エッセイ/フォトエッセイ/お知らせ/その他（未指定は「その他」）
-excerpt: "任意。全文検索の対象に含まれます。"
+category: "エッセイ"   # エッセイ/フォトエッセイ/お知らせ/ログ（未指定は「ログ」）
 ---
+
+本文を Markdown で。
 ```
 
-`python build.py` が全記事ページとブログ一覧を一括生成します。
+> 見出しは `## 見出し` のように `#` の後に**半角スペース**を入れてください（Jekyll の kramdown 仕様）。
+
+## サイトの設定
+
+`_config.yml` で変更できます。
+
+| 項目 | キー |
+|---|---|
+| ブログ名 | `title` |
+| サブタイトル | `subtitle` |
+| カテゴリと表示順 | `categories_list` |
+| 未指定時のカテゴリ | `default_category` |
+
+見た目は `style.css`、ページ構造は `_layouts/`（`default.html` / `post.html`）と `index.html`。
 
 ## 特徴
 
 - ヘッダー（タイトル＋サブタイトル）＋全文検索＋カテゴリ絞り込みのシンプル構成
-- 全文検索（タイトル・本文をブラウザ内で横断検索）
-- カテゴリ絞り込み（`build.py` の `CATEGORIES`）
+- 全文検索（タイトル・本文をブラウザ内で横断検索。ビルド時に埋め込み）
 - サムネイル・タグなしのミニマルなリスト表示
 - ダーク/ライトは OS 設定（`prefers-color-scheme`）に追従
-- Markdown を書くだけで記事が増やせるビルドスクリプト
 
-タイトル・サブタイトル・ヘッダーリンク・カテゴリは `build.py` 冒頭の
-`BLOG_TITLE` / `BLOG_SUBTITLE` / `BACK_LINK` / `CATEGORIES` で変更できます。
+## 隠しページ `/secret`
+
+パスワードで保護されたページ（フッターの「community」からアクセス）。
+本文は AES-256-GCM で暗号化して `secret.html` に埋め込まれており、
+正しいパスワード入力時のみブラウザ内で復号されます。
+
+内容を更新するには、平文の `secret_content.md`（Git 管理外）を編集して再生成します。
+
+```bash
+pip install -r requirements.txt
+SECRET_PW='パスワード' python3 make_secret.py
+```
+
+生成された `secret.html` をコミットすれば反映されます（別の `.md` を引数で指定も可）。
+`secret.html` は Jekyll に処理されない静的ファイルとしてそのまま配信されます。

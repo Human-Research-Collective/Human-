@@ -1,1 +1,4 @@
+# 隠しページ (secret.html) の生成にのみ必要。
+# サイト本体は GitHub Pages の Jekyll がビルドするため、依存はありません。
 markdown>=3.10
+cryptography>=42
