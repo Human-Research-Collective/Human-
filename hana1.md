@@ -28,7 +28,7 @@ category: "エッセイ"
 
 松本はな
 
-###参考文献
+### 参考文献
 De Saussure, F., 1916, Le Cours de Linguistique Générale, Paris: Payot.（町田健　　　
 訳，2016，『新訳 ソシュール一般般言語学講義』研究社．）
 Giddens, A., 1991, Modernity and Self-Identity: Self and Society in the Late Modern Age, Cambridge: Polity Press.
