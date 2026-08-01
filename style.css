@@ -85,6 +85,21 @@ img { max-width: 100%; height: auto; }
   color: var(--muted);
 }
 
+.blog-head__news {
+  margin-top: 8px;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.blog-head__news a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s;
+}
+
+.blog-head__news a:hover { color: var(--link-hover); }
+
 /* ===== Search ===== */
 .search {
   display: flex;
