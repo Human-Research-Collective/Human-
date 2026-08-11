@@ -1,5 +1,5 @@
 ---
-title: "人間と花"
+title: "人間と花（「Human? Issue 2」収録）"
 date: 2026-08-11
 category: "エッセイ"
 ---
