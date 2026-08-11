@@ -4,7 +4,11 @@ newsletter_url: "https://humanresearchcollective.substack.com/"
 description: "ZINE「Human?」の制作を通して〈人間とは何か？〉を探求するコレクティブのブログ。"
 
 # GitHub Pages のプロジェクトサイト（https://<user>.github.io/Human-/）用
+url: "https://human-research-collective.github.io"
 baseurl: "/Human-"
+
+# SNS シェア時のカード画像（全ページ共通・1200x630）
+ogp_image: "/images/ogp.png"
 
 markdown: kramdown
 
