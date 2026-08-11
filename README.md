@@ -36,6 +36,15 @@ category: "エッセイ"   # エッセイ/フォトエッセイ/お知らせ/ロ
 - 画像は自動で本文幅に収まり、角丸＋枠線が付きます（`style.css`）
 - 写真はアップロード前に長辺 1600px 程度まで縮小しておくと表示が軽くなります
 
+## OGP（SNS シェア時のカード画像）
+
+全ページ共通で `images/ogp.png`（1200×630）を使います。差し替えるときは同じパスに
+同じサイズの画像を置くか、`_config.yml` の `ogp_image` を変更してください。
+
+> 反映されないときは各SNSのキャッシュが原因です。X なら
+> [Card Validator](https://cards-dev.twitter.com/validator)、Facebook なら
+> [Sharing Debugger](https://developers.facebook.com/tools/debug/) で再取得できます。
+
 ## サイトの設定
 
 `_config.yml` で変更できます。
