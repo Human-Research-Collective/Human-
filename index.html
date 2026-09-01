@@ -20,11 +20,6 @@ layout: default
 {% endfor %}      </div>
     </div>
 
-    <div class="authorfilter" hidden>
-      著者「<span class="authorfilter__name"></span>」で絞り込み中
-      <button class="authorfilter__clear" type="button">× 解除</button>
-    </div>
-
     <main class="posts">
 {% assign articles = site.pages | where_exp: "p", "p.date" | sort: "date" | reverse %}
 {% for p in articles %}      <article class="post" data-category="{{ p.category | default: site.default_category }}" data-author="{{ p.author | default: '' }}" data-search="{{ p.title | append: ' ' | append: p.content | strip_html | strip_newlines | downcase | escape }}">
@@ -48,9 +43,6 @@ layout: default
       var input = document.querySelector(".search__input");
       var btn = document.querySelector(".search__btn");
       var pills = Array.prototype.slice.call(document.querySelectorAll(".catfilter .pill"));
-      var authorBar = document.querySelector(".authorfilter");
-      var authorName = document.querySelector(".authorfilter__name");
-      var authorClear = document.querySelector(".authorfilter__clear");
       var activeCat = "all";
       var activeAuthor = null; // null = 絞り込みなし
 
@@ -88,8 +80,9 @@ layout: default
 
       function setAuthor(name) {
         activeAuthor = name || null;
-        if (authorBar) authorBar.hidden = !activeAuthor;
-        if (authorName) authorName.textContent = activeAuthor || "";
+        document.querySelectorAll(".post__author").forEach(function (a) {
+          a.classList.toggle("is-active", !!activeAuthor && a.textContent.trim() === activeAuthor);
+        });
         updateUrl();
         apply();
       }
@@ -107,18 +100,16 @@ layout: default
         });
       });
 
-      // 記事カード内の著者名をクリックすると、その著者の記事だけに絞り込む
+      // 記事カード内の著者名をクリックすると、その著者の記事だけに絞り込む。
+      // 絞り込み中の著者をもう一度クリックすると解除される。
       document.querySelectorAll(".post .post__author").forEach(function (a) {
         a.addEventListener("click", function (e) {
           e.preventDefault();
-          setAuthor(a.textContent.trim());
+          var name = a.textContent.trim();
+          setAuthor(activeAuthor === name ? null : name);
           window.scrollTo({ top: 0, behavior: "smooth" });
         });
       });
-
-      if (authorClear) {
-        authorClear.addEventListener("click", function () { setAuthor(null); });
-      }
 
       if (input) input.addEventListener("input", apply);
       if (btn) btn.addEventListener("click", apply);
