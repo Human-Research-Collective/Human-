@@ -1,6 +1,7 @@
 ---
 title: "あなたの箸休めになりたい"
 date: 2026-04-29
+author: "ebina"
 category: "エッセイ"
 ---
 　人間とは何か。

@@ -1,6 +1,7 @@
 ---  
 title: "「Human? Issue 2」予約受付開始"  
 date: 2026-08-01
+author: "上野裕太郎"
 category: "お知らせ"  
 ---
 Human Research Collective編「Human? Issue 2」の予約受付を開始しました。今号は「生き物と人間」をテーマにした特集号です。Issue 1からのお馴染みのメンバーもいれば、今号が初参加のメンバーも。
