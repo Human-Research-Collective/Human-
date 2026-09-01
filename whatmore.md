@@ -2,6 +2,7 @@
 title: "what more? これ以上なにを望もうか？"
 date: 2026-09-01
 category: "エッセイ"
+author: "ebina"
 ---
 what more?
 "これ以上なにを望もうか？"  
