@@ -1,6 +1,7 @@
 ---
 title: "Human Research Collectiveへの参加方法"
 date: 2026-07-26
+author: "上野裕太郎"
 category: "お知らせ"
 ---
 ## 「Human?」について

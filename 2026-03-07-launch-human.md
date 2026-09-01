@@ -1,6 +1,7 @@
 ---
 title: '「Human?」創刊 / Launch the zine "Human?"'
 date: 2026-03-07
+author: "上野裕太郎"
 category: "お知らせ"
 excerpt: "Human Research Collective は、ZINE「Human?」を創刊します。タイトルの通り、人間について探求するZINEです。一緒に人間とは何か、考えませんか。"
 ---

@@ -7,6 +7,9 @@ layout: default
       <div class="article__meta">
         <span class="article__cat">{{ page.category | default: site.default_category }}</span>
         <span class="article__date">{{ page.date | date: "%Y年%m月%d日" }}</span>
+        {%- if page.author %}
+        <a class="article__author" href="{{ '/' | relative_url }}?author={{ page.author | url_encode }}">{{ page.author }}</a>
+        {%- endif %}
       </div>
       <div class="article__body">
 {{ content }}

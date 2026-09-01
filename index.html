@@ -20,13 +20,21 @@ layout: default
 {% endfor %}      </div>
     </div>
 
+    <div class="authorfilter" hidden>
+      著者「<span class="authorfilter__name"></span>」で絞り込み中
+      <button class="authorfilter__clear" type="button">× 解除</button>
+    </div>
+
     <main class="posts">
 {% assign articles = site.pages | where_exp: "p", "p.date" | sort: "date" | reverse %}
-{% for p in articles %}      <article class="post" data-category="{{ p.category | default: site.default_category }}" data-search="{{ p.title | append: ' ' | append: p.content | strip_html | strip_newlines | downcase | escape }}">
+{% for p in articles %}      <article class="post" data-category="{{ p.category | default: site.default_category }}" data-author="{{ p.author | default: '' }}" data-search="{{ p.title | append: ' ' | append: p.content | strip_html | strip_newlines | downcase | escape }}">
         <a href="{{ p.url | remove: '.html' | relative_url }}" class="post__title">{{ p.title }}</a>
         <div class="post__meta">
           <span class="post__cat">{{ p.category | default: site.default_category }}</span>
           <span class="post__date">{{ p.date | date: "%Y年%m月%d日" }}</span>
+          {%- if p.author %}
+          <a href="?author={{ p.author | url_encode }}" class="post__author">{{ p.author }}</a>
+          {%- endif %}
         </div>
       </article>
 
@@ -40,15 +48,20 @@ layout: default
       var input = document.querySelector(".search__input");
       var btn = document.querySelector(".search__btn");
       var pills = Array.prototype.slice.call(document.querySelectorAll(".catfilter .pill"));
+      var authorBar = document.querySelector(".authorfilter");
+      var authorName = document.querySelector(".authorfilter__name");
+      var authorClear = document.querySelector(".authorfilter__clear");
       var activeCat = "all";
+      var activeAuthor = null; // null = 絞り込みなし
 
       function apply() {
         var q = (input && input.value || "").trim().toLowerCase();
         var shown = 0;
         posts.forEach(function (el) {
           var okCat = activeCat === "all" || el.getAttribute("data-category") === activeCat;
+          var okAuthor = !activeAuthor || el.getAttribute("data-author") === activeAuthor;
           var okQ = q === "" || (el.getAttribute("data-search") || "").indexOf(q) !== -1;
-          var show = okCat && okQ;
+          var show = okCat && okAuthor && okQ;
           el.hidden = !show;
           if (show) shown++;
         });
@@ -60,6 +73,24 @@ layout: default
         pills.forEach(function (p) {
           p.classList.toggle("is-active", p.getAttribute("data-cat") === cat);
         });
+        apply();
+      }
+
+      function updateUrl() {
+        var url = new URL(window.location.href);
+        if (activeAuthor) {
+          url.searchParams.set("author", activeAuthor);
+        } else {
+          url.searchParams.delete("author");
+        }
+        window.history.replaceState(null, "", url.pathname + url.search);
+      }
+
+      function setAuthor(name) {
+        activeAuthor = name || null;
+        if (authorBar) authorBar.hidden = !activeAuthor;
+        if (authorName) authorName.textContent = activeAuthor || "";
+        updateUrl();
         apply();
       }
 
@@ -76,8 +107,26 @@ layout: default
         });
       });
 
+      // 記事カード内の著者名をクリックすると、その著者の記事だけに絞り込む
+      document.querySelectorAll(".post .post__author").forEach(function (a) {
+        a.addEventListener("click", function (e) {
+          e.preventDefault();
+          setAuthor(a.textContent.trim());
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      });
+
+      if (authorClear) {
+        authorClear.addEventListener("click", function () { setAuthor(null); });
+      }
+
       if (input) input.addEventListener("input", apply);
       if (btn) btn.addEventListener("click", apply);
+
+      // 記事ページの著者名リンク（?author=…）や共有URLからの絞り込みに対応
+      var fromUrl = new URLSearchParams(window.location.search).get("author");
+      if (fromUrl) setAuthor(fromUrl);
+
       apply();
     })();
     </script>
