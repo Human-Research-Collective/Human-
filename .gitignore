@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 secret_content.html
 secret_content.md
+tools/out/
